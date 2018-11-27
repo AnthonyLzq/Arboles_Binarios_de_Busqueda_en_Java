@@ -2,7 +2,7 @@ package Árboles_binarios;
 
 public class ÁrbolBinario {
 	private NodoÁrbol raíz;
-	private String recorridoInOrden = "";
+	private String recorridoInOrder = "";
 	//Constructor
 	public ÁrbolBinario(){
 		setRaíz(null);
@@ -35,23 +35,23 @@ public class ÁrbolBinario {
 			setRaíz(nuevo);
 		}
 	}
-	//Recorrido InOrden
+	//Recorrido InOrder
 	/*v
-	 * El recorrido InOrden se hace de la siguiente manera: 
+	 * El recorrido InOrder se hace de la siguiente manera: 
 	 *  Hijo Izquierdo -> Raíz -> Hijo Derecho
 	 *  Hay que realizar las siguientes operaciones de forma pseudo recursiva
-	 *  1) Recorrer el subárbol izquierdo InOrden
+	 *  1) Recorrer el subárbol izquierdo InOrder
 	 *  2) Examinar la raíz
-	 *  3) Recorrer el subárbol derecho InOrden
+	 *  3) Recorrer el subárbol derecho InOrder
 	 */
 	
-	public String InOrden(NodoÁrbol raíz) {
+	public String InOrder(NodoÁrbol raíz) {
 		if(raíz != null) {
-			InOrden(raíz.getHijoIzquierdo());
-			setRecorridoInOrden(Integer.toString(raíz.getDato()));
-			InOrden(raíz.getHijoDerecho());
+			InOrder(raíz.getHijoIzquierdo());
+			setRecorridoInOrder(Integer.toString(raíz.getDato()));
+			InOrder(raíz.getHijoDerecho());
 		}
-		return getRecorridoInOrden();
+		return getRecorridoInOrder();
 	}
 	
 	//Ver si el árbol está vacío
@@ -66,10 +66,10 @@ public class ÁrbolBinario {
 	public NodoÁrbol getRaíz() {
 		return raíz;
 	}
-	public void setRecorridoInOrden(String recorridoInOrden) {
-		this.recorridoInOrden = this.recorridoInOrden + " " + recorridoInOrden;
+	public void setRecorridoInOrder(String recorridoInOrder) {
+		this.recorridoInOrder = this.recorridoInOrder + " " + recorridoInOrder;
 	}
-	public String getRecorridoInOrden() {
-		return recorridoInOrden;
+	public String getRecorridoInOrder() {
+		return recorridoInOrder;
 	}
 }

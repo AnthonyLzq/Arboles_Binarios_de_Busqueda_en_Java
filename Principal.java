@@ -13,7 +13,7 @@ public class Principal {
 			try {
 				opción = Integer.parseInt(JOptionPane.showInputDialog(null,
 						"1. Agregar un Nodo\n"
-						+ "2. Recorrer el árbol InOrden\n"
+						+ "2. Recorrer el árbol InOrder\n"
 						+ "3. Salir\n"
 						+ "Elige una opción:", "Menú", JOptionPane.QUESTION_MESSAGE));
 				switch(opción) {
@@ -27,10 +27,10 @@ public class Principal {
 						arbolito.AgregarNodo(elemento, nombre);
 						break;
 					case 2:
-						//System.out.println(arbolito.InOrden(arbolito.getRaíz()));
-						JOptionPane.showMessageDialog(null, "El recorrido InOrden es:"
-								+ "\n" + arbolito.InOrden(arbolito.getRaíz()), 
-								"Recorrido InOrden", JOptionPane.INFORMATION_MESSAGE);
+						//System.out.println(arbolito.InOrder(arbolito.getRaíz()));
+						JOptionPane.showMessageDialog(null, "El recorrido InOrder es:"
+								+ "\n" + arbolito.InOrder(arbolito.getRaíz()), 
+								"Recorrido InOrder", JOptionPane.INFORMATION_MESSAGE);
 						break;
 					case 3:
 						JOptionPane.showMessageDialog(null,
