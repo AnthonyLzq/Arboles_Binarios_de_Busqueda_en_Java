@@ -34,6 +34,24 @@ public class ÁrbolBinario {
 			setRaíz(nuevo);
 		}
 	}
+	//Recorrido InOrden
+	/*
+	 * El recorrido InOrden se hace de la siguiente manera: 
+	 *  Hijo Izquierdo -> Raíz -> Hijo Derecho
+	 *  Hay que realizar las siguientes operaciones de forma pseudo recursiva
+	 *  1) Recorrer el subárbol izquierdo InOrden
+	 *  2) Examinar la raíz
+	 *  3) Recorrer el subárbol derecho InOrden
+	 */
+	
+	public void InOrden(NodoÁrbol raíz) {
+		if(raíz != null) {
+			InOrden(raíz.getHijoIzquierdo());
+			System.out.println(raíz.getDato());
+			InOrden(raíz.getHijoDerecho());
+		}
+	}
+	
 	//Ver si el árbol está vacío
 	public boolean Empty() {
 		return getRaíz() == null;

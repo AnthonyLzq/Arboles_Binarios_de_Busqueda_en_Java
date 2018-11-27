@@ -13,7 +13,8 @@ public class Principal {
 			try {
 				opción = Integer.parseInt(JOptionPane.showInputDialog(null,
 						"1. Agregar un Nodo\n"
-						+ "2. Salir\n"
+						+ "2. Recorrer el árbol InOrden\n"
+						+ "3. Salir\n"
 						+ "Elige una opción:", "Menú", JOptionPane.QUESTION_MESSAGE));
 				switch(opción) {
 					case 1:
@@ -26,6 +27,9 @@ public class Principal {
 						arbolito.AgregarNodo(elemento, nombre);
 						break;
 					case 2:
+						arbolito.InOrden(arbolito.getRaíz());
+						break;
+					case 3:
 						JOptionPane.showMessageDialog(null,
 								"Aplicación finalizada", "Fin",
 								JOptionPane.INFORMATION_MESSAGE);
@@ -38,7 +42,7 @@ public class Principal {
 			}catch(NumberFormatException n) {
 				JOptionPane.showMessageDialog(null, "Error " +n.getMessage());
 			}
-		}while(opción != 2);
+		}while(opción != 3);
 	}
 
 }
