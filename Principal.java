@@ -27,7 +27,10 @@ public class Principal {
 						arbolito.AgregarNodo(elemento, nombre);
 						break;
 					case 2:
-						arbolito.InOrden(arbolito.getRaíz());
+						//System.out.println(arbolito.InOrden(arbolito.getRaíz()));
+						JOptionPane.showMessageDialog(null, "El recorrido InOrden es:"
+								+ "\n" + arbolito.InOrden(arbolito.getRaíz()), 
+								"Recorrido InOrden", JOptionPane.INFORMATION_MESSAGE);
 						break;
 					case 3:
 						JOptionPane.showMessageDialog(null,

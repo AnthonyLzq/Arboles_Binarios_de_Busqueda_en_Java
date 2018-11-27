@@ -2,6 +2,7 @@ package Árboles_binarios;
 
 public class ÁrbolBinario {
 	private NodoÁrbol raíz;
+	private String recorridoInOrden = "";
 	//Constructor
 	public ÁrbolBinario(){
 		setRaíz(null);
@@ -35,7 +36,7 @@ public class ÁrbolBinario {
 		}
 	}
 	//Recorrido InOrden
-	/*
+	/*v
 	 * El recorrido InOrden se hace de la siguiente manera: 
 	 *  Hijo Izquierdo -> Raíz -> Hijo Derecho
 	 *  Hay que realizar las siguientes operaciones de forma pseudo recursiva
@@ -44,12 +45,13 @@ public class ÁrbolBinario {
 	 *  3) Recorrer el subárbol derecho InOrden
 	 */
 	
-	public void InOrden(NodoÁrbol raíz) {
+	public String InOrden(NodoÁrbol raíz) {
 		if(raíz != null) {
 			InOrden(raíz.getHijoIzquierdo());
-			System.out.println(raíz.getDato());
+			setRecorridoInOrden(Integer.toString(raíz.getDato()));
 			InOrden(raíz.getHijoDerecho());
 		}
+		return getRecorridoInOrden();
 	}
 	
 	//Ver si el árbol está vacío
@@ -63,5 +65,11 @@ public class ÁrbolBinario {
 	}
 	public NodoÁrbol getRaíz() {
 		return raíz;
+	}
+	public void setRecorridoInOrden(String recorridoInOrden) {
+		this.recorridoInOrden = this.recorridoInOrden + " " + recorridoInOrden;
+	}
+	public String getRecorridoInOrden() {
+		return recorridoInOrden;
 	}
 }
