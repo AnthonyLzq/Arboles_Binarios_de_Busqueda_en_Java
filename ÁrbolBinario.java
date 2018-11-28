@@ -6,6 +6,7 @@ public class ÁrbolBinario {
 	private NodoÁrbol raíz;
 	private ArrayList<Integer> RecorrerInOrder = new ArrayList<Integer>();
 	private ArrayList<Integer> RecorrerPreOrder = new ArrayList<Integer>();
+	private ArrayList<Integer> RecorrerPostOrder = new ArrayList<Integer>();
 	/* Ahora se usarán vectores dinámicos para almacenar los recorridos que posteriormente servirán para 
 	 * calcular la matriz de adyacencia del árbol que desee y así poder graficarlo.
 	 */
@@ -89,6 +90,29 @@ public class ÁrbolBinario {
 		return getRecorrerPreOrder();
 	}
 	
+	//Recorrido PostOrder
+		/*
+		 * El recorrido PreOrder se hace de la siguiente manera:
+		 * Hijo izquierdo -> Hijo Derecho -> Raíz  
+		 * Hay que realizar las siguientes operaciones de forma pseudo recursiva
+		 * 1) Recorrer el subárbol izquierdo PostOrder
+		 * 2) Recorrer el subárbol derecho PostOrder
+		 * 3) Examinar la raíz
+		 * Finalmente, este método nos devolverá un vector dinámico que contiene todos los nodos ya ordenados.
+		 */
+		
+	public ArrayList<Integer> PostOrder(NodoÁrbol raíz) {
+		if(raíz != null) {
+			PostOrder(raíz.getHijoIzquierdo());
+			PostOrder(raíz.getHijoDerecho());
+			RecorrerPostOrder.add(raíz.getDato());
+			/*
+			 * Se va agregando cada uno de los datos al vector dinámico
+			*/
+		}
+		return getRecorrerPostOrder();
+		}
+	
 	//Ver si el árbol está vacío
 	public boolean Empty() {
 		return getRaíz() == null;
@@ -106,5 +130,8 @@ public class ÁrbolBinario {
 	}
 	public ArrayList<Integer> getRecorrerInOrder() {
 		return RecorrerInOrder;
+	}
+	public ArrayList<Integer> getRecorrerPostOrder() {
+		return RecorrerPostOrder;
 	}
 }

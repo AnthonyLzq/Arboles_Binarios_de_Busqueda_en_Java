@@ -7,7 +7,7 @@ public class Principal {
 
 	public static void main(String[] args) {
 		int opción = 0, elemento;
-		String nombre, RIO = "", RPO = "";
+		String nombre, RIO = "", RPO = "", RPtO = "";
 		/*
 		 * Creo dos vectores
 		 *  RIO: Recorrido In-Order, que me servirá para almacenar los nodos del árbol según el recorrido "In Order"
@@ -16,6 +16,7 @@ public class Principal {
 		ÁrbolBinario arbolito = new ÁrbolBinario();
 		ArrayList<Integer> RecorridoIO;
 		ArrayList<Integer> RecorridoPO;
+		ArrayList<Integer> RecorridoPtO;
 		/*
 		 * Creo dos vectores dinámicos de tal forma que sean una copia de los anteriores creados en la clase
 		 * ÁrbolBinario, de esta forma si hago alguna modificación en la función principal no pierdo los datos 
@@ -27,7 +28,8 @@ public class Principal {
 						"1. Agregar un Nodo\n"
 						+ "2. Recorrer el árbol InOrder\n"
 						+ "3. Recorrer el árbol PreOrder\n"
-						+ "4. Salir\n"
+						+ "4. Recorrer el árbol PostOrder\n"
+						+ "5. Salir\n"
 						+ "Elige una opción:", "Menú", JOptionPane.QUESTION_MESSAGE));
 				switch(opción) {
 					case 1:
@@ -50,7 +52,6 @@ public class Principal {
 							 * Aquí se realiza la copia de vectores dinámicos, primero se copia el Recorrido
 							 * In Order, utilizando el método "InOrder" de la clase ÁrbolBinario
 							 */	
-							System.out.println(RecorridoIO.size());
 							for(int i = 0; i < RecorridoIO.size(); i++) {
 								if(i < RecorridoIO.size() - 1) {
 									RIO = RIO + RecorridoIO.get(i) +", ";
@@ -77,7 +78,6 @@ public class Principal {
 							 * Aquí se realiza la copia de vectores dinámicos, primero se copia el Recorrido
 							 * Pre Order, utilizando el método "PreOrder" de la clase ÁrbolBinario
 							 */
-							System.out.println(RecorridoPO.size());
 							for(int i = 0; i < RecorridoPO.size(); i++) {
 								if(i < RecorridoPO.size() - 1) {
 									RPO = RPO + RecorridoPO.get(i) +", ";
@@ -105,6 +105,39 @@ public class Principal {
 						}
 						break;
 					case 4:
+						if(!arbolito.Empty()) {
+							RecorridoPtO = new ArrayList<Integer>(arbolito.PostOrder(arbolito.getRaíz()));
+							/*
+							 * Aquí se realiza la copia de vectores dinámicos, primero se copia el Recorrido
+							 * Pre Order, utilizando el método "PreOrder" de la clase ÁrbolBinario
+							 */
+							for(int i = 0; i < RecorridoPtO.size(); i++) {
+								if(i < RecorridoPtO.size() - 1) {
+									RPtO = RPtO + RecorridoPtO.get(i) +", ";
+								}
+								else {
+									RPtO = RPtO +  RecorridoPtO.get(i) + "\n";
+								}
+							}
+							JOptionPane.showMessageDialog(null, "El recorrido Pre Order es:\n" + RPtO,
+								"Recorrido PreOrder", JOptionPane.INFORMATION_MESSAGE);			
+							arbolito.PostOrder(arbolito.getRaíz()).clear();
+							RPtO = "";
+							/*
+							 * Limpiamos el ArrayList "PreOrder" para que no acumule repetidamente los valores que
+							 * ya tenía previamente, es decir, si no se limpia el ArrayList se irá acumulando lo 
+							 * que anteriormente lo que tenía, por ejemplo: si antes el ArrayList tenía los sigui-
+							 * entes elementos: 3, 10, 8; al volver a seleccionar la opción 2 imprimirá:
+							 * 3, 10, 8, 3, 10, 8 y así sucesivamente. Igualmente hay que limpiar la cadena para
+							 * que no imprima dos veces.
+							 */
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "El árbol está vacío",
+									"Error", JOptionPane.CANCEL_OPTION);
+						}
+						break;
+					case 5:
 						JOptionPane.showMessageDialog(null,
 								"Aplicación finalizada", "Fin",
 								JOptionPane.INFORMATION_MESSAGE);
@@ -117,7 +150,7 @@ public class Principal {
 			}catch(NumberFormatException n) {
 				JOptionPane.showMessageDialog(null, "Error " +n.getMessage());
 			}
-		}while(opción != 4);
+		}while(opción != 5);
 	}
 
 }
