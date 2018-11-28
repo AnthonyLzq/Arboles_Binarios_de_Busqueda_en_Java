@@ -6,7 +6,6 @@ import javax.swing.JOptionPane;
 public class Principal {
 
 	public static void main(String[] args) {
-		
 		int opción = 0, elemento;
 		String nombre, RIO = "", RPO = "";
 		/*
@@ -50,7 +49,7 @@ public class Principal {
 							/*
 							 * Aquí se realiza la copia de vectores dinámicos, primero se copia el Recorrido
 							 * In Order, utilizando el método "InOrder" de la clase ÁrbolBinario
-							 */
+							 */	
 							System.out.println(RecorridoIO.size());
 							for(int i = 0; i < RecorridoIO.size(); i++) {
 								if(i < RecorridoIO.size() - 1) {
@@ -62,6 +61,9 @@ public class Principal {
 							}
 							JOptionPane.showMessageDialog(null, "El recorrido In Order es:\n" + RIO,
 								"Recorrido InOrder", JOptionPane.INFORMATION_MESSAGE);
+							arbolito.InOrder(arbolito.getRaíz()).clear();
+							RIO = "";
+							
 						}
 						else {
 							JOptionPane.showMessageDialog(null, "El árbol está vacío",
@@ -85,7 +87,17 @@ public class Principal {
 								}
 							}
 							JOptionPane.showMessageDialog(null, "El recorrido Pre Order es:\n" + RPO,
-								"Recorrido PreOrder", JOptionPane.INFORMATION_MESSAGE);							
+								"Recorrido PreOrder", JOptionPane.INFORMATION_MESSAGE);			
+							arbolito.PreOrder(arbolito.getRaíz()).clear();
+							RPO = "";
+							/*
+							 * Limpiamos el ArrayList "PreOrder" para que no acumule repetidamente los valores que
+							 * ya tenía previamente, es decir, si no se limpia el ArrayList se irá acumulando lo 
+							 * que anteriormente lo que tenía, por ejemplo: si antes el ArrayList tenía los sigui-
+							 * entes elementos: 8, 3, 10; al volver a seleccionar la opción 2 imprimirá:
+							 * 8, 3, 10, 8, 3, 10 y así sucesivamente. Igualmente hay que limpiar la cadena para
+							 * que no imprima dos veces.
+							 */
 						}
 						else {
 							JOptionPane.showMessageDialog(null, "El árbol está vacío",
