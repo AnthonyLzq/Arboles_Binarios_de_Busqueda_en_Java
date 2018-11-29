@@ -64,7 +64,14 @@ public class Principal {
 								"Recorrido InOrder", JOptionPane.INFORMATION_MESSAGE);
 							arbolito.InOrder(arbolito.getRaíz()).clear();
 							RIO = "";
-							
+							/*
+							 * Limpiamos el ArrayList "InOrder" para que no acumule repetidamente los valores que
+							 * ya tenía previamente, es decir, si no se limpia el ArrayList se irá acumulando lo 
+							 * que anteriormente lo que tenía, por ejemplo: si antes el ArrayList tenía los sigui-
+							 * entes elementos: 3, 8, 10; al volver a seleccionar la opción 2 imprimirá:
+							 * 3, 8, 10, 3, 8, 10 y así sucesivamente. Igualmente hay que limpiar la cadena para
+							 * que no imprima dos veces.
+							 */
 						}
 						else {
 							JOptionPane.showMessageDialog(null, "El árbol está vacío",
