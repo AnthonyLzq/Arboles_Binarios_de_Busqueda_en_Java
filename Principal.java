@@ -7,11 +7,18 @@ public class Principal {
 
 	public static void main(String[] args) {
 		int opción = 0, elemento;
-		String nombre, RIO = "", RPO = "", RPtO = "";
 		/*
-		 * Creo dos vectores
+		 * La opción me servirá como variable del menú
+		 * El elemento me servirá como variable que reciba los valores que deben contener los datos
+		 */
+		String RIO = "", RPO = "", RPtO = "";
+		/*
+		 * String nombre;
+		 * Nombre aún no se usará, quizás pasará a eliminarse.
+		 * Creo tres cadenas
 		 *  RIO: Recorrido In-Order, que me servirá para almacenar los nodos del árbol según el recorrido "In Order"
 		 *  RPO: Recorrido Pre-Order, que me servirá para almacenar los nodos del árbol según el recorrido "Pre Order"
+		 *  RPtO: Recorrido Post-Order, que me servirá para almacenar los nodos del árbol según el recorrido "Post Order"
 		 */
 		ÁrbolBinario arbolito = new ÁrbolBinario();
 		ArrayList<Integer> RecorridoIO;
@@ -102,7 +109,7 @@ public class Principal {
 							 * ya tenía previamente, es decir, si no se limpia el ArrayList se irá acumulando lo 
 							 * que anteriormente lo que tenía, por ejemplo: si antes el ArrayList tenía los sigui-
 							 * entes elementos: 8, 3, 10; al volver a seleccionar la opción 2 imprimirá:
-							 * 8, 3, 10, 8, 3, 10 y así sucesivamente. Igualmente hay que limpiar la cadena para
+							￼ * 8, 3, 10, 8, 3, 10 y así sucesivamente. Igualmente hay que limpiar la cadena para
 							 * que no imprima dos veces.
 							 */
 						}
