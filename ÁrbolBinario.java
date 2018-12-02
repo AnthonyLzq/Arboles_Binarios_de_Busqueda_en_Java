@@ -19,8 +19,8 @@ public class ÁrbolBinario {
 	//Métodos
 	
 	//Agregar nodo
-	public void AgregarNodo(int dato, String nombre) {
-		NodoÁrbol nuevo = new NodoÁrbol(dato, nombre); 
+	public void AgregarNodo(int dato) {
+		NodoÁrbol nuevo = new NodoÁrbol(dato); 
 		if(!Empty()) {
 			NodoÁrbol auxiliar = raíz;
 			NodoÁrbol padre;

@@ -15,7 +15,7 @@ public class Principal {
 		/*
 		 * String nombre;
 		 * Nombre aún no se usará, quizás pasará a eliminarse.
-		 * Creo tres cadenas
+		 * Creo tres cadenasString nombre
 		 *  RIO: Recorrido In-Order, que me servirá para almacenar los nodos del árbol según el recorrido "In Order"
 		 *  RPO: Recorrido Pre-Order, que me servirá para almacenar los nodos del árbol según el recorrido "Pre Order"
 		 *  RPtO: Recorrido Post-Order, que me servirá para almacenar los nodos del árbol según el recorrido "Post Order"
@@ -50,7 +50,7 @@ public class Principal {
 						 * 
 						 * Por el momento no se utilizará el nombre de los nodos.
 						 */
-						arbolito.AgregarNodo(elemento, null);
+						arbolito.AgregarNodo(elemento);
 						break;
 					case 2:
 						if(!arbolito.Empty()) {
