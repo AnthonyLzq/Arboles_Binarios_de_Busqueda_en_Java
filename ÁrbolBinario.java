@@ -113,6 +113,28 @@ public class ÁrbolBinario {
 		return getRecorrerPostOrder();
 		}
 	
+	
+	//Método para buscar un nodo
+	/*
+	 * Para poder buscar un nodo debemos recorrer el árbol, primero solicitaremos el dato que se quiere buscar
+	 * y luego veremos si el nodo se encuentra o no el árbol, de encontrarse lo devolvermos, y si no es el caso
+	 * retornaremos null
+	 */
+	public NodoÁrbol buscador(int dato) {
+		NodoÁrbol auxiliar = raíz;
+		while(dato != auxiliar.getDato()) {
+			if(dato < auxiliar.getDato()) {
+				auxiliar = auxiliar.getHijoIzquierdo();
+			}else {
+				auxiliar = auxiliar.getHijoDerecho();
+			}
+			if(auxiliar == null) {
+				return null;
+			}
+		}
+		return auxiliar;
+	}
+	
 	//Ver si el árbol está vacío
 	public boolean Empty() {
 		return getRaíz() == null;

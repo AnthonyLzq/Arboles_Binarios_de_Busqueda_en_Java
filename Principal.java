@@ -36,7 +36,8 @@ public class Principal {
 						+ "2. Recorrer el árbol InOrder\n"
 						+ "3. Recorrer el árbol PreOrder\n"
 						+ "4. Recorrer el árbol PostOrder\n"
-						+ "5. Salir\n"
+						+ "5. Buscar un nodo en el árbol\n"
+						+ "6. Salir\n"
 						+ "Elige una opción:", "Menú", JOptionPane.QUESTION_MESSAGE));
 				switch(opción) {
 					case 1:
@@ -82,7 +83,7 @@ public class Principal {
 						}
 						else {
 							JOptionPane.showMessageDialog(null, "El árbol está vacío",
-									"Error", JOptionPane.CANCEL_OPTION);
+									"Error", JOptionPane.ERROR_MESSAGE);
 						}
 						break;
 					case 3:
@@ -115,7 +116,7 @@ public class Principal {
 						}
 						else {
 							JOptionPane.showMessageDialog(null, "El árbol está vacío",
-									"Error", JOptionPane.CANCEL_OPTION);
+									"Error", JOptionPane.ERROR_MESSAGE);
 						}
 						break;
 					case 4:
@@ -148,10 +149,28 @@ public class Principal {
 						}
 						else {
 							JOptionPane.showMessageDialog(null, "El árbol está vacío",
-									"Error", JOptionPane.CANCEL_OPTION);
+									"Error", JOptionPane.ERROR_MESSAGE);
 						}
 						break;
 					case 5:
+							if(!arbolito.Empty()) {
+								elemento = Integer.parseInt(JOptionPane.showInputDialog(null, 
+										"Ingrese un número a buscar en el árbol:", "Buscando nodos",
+										JOptionPane.INFORMATION_MESSAGE));
+								if(arbolito.buscador(elemento) != null) {
+									JOptionPane.showMessageDialog(null, "El nodo se encuentra en el árbol",
+											"Nodo encontrado", JOptionPane.INFORMATION_MESSAGE);
+								}else {
+									JOptionPane.showMessageDialog(null, "El nodo no se encuentra en el árbol",
+											"Error", JOptionPane.ERROR_MESSAGE);
+								}
+							}
+							else {
+								JOptionPane.showMessageDialog(null, "El árbol está vacío",
+										"Error", JOptionPane.ERROR_MESSAGE);
+							}
+						break;
+					case 6:
 						JOptionPane.showMessageDialog(null,
 								"Aplicación finalizada", "Fin",
 								JOptionPane.INFORMATION_MESSAGE);
@@ -164,7 +183,7 @@ public class Principal {
 			}catch(NumberFormatException n) {
 				JOptionPane.showMessageDialog(null, "Error " +n.getMessage());
 			}
-		}while(opción != 5);
+		}while(opción != 6);
 	}
 
 }
