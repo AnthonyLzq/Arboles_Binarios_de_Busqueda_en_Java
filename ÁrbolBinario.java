@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class ÁrbolBinario {
 	private NodoÁrbol raíz;
+	private int altura;
 	private ArrayList<Integer> RecorrerInOrder = new ArrayList<Integer>();
 	private ArrayList<Integer> RecorrerPreOrder = new ArrayList<Integer>();
 	private ArrayList<Integer> RecorrerPostOrder = new ArrayList<Integer>();
@@ -14,6 +15,7 @@ public class ÁrbolBinario {
 	//Constructor
 	public ÁrbolBinario(){
 		setRaíz(null);
+		altura = 0;
 	}
 	
 	//Métodos
@@ -113,7 +115,6 @@ public class ÁrbolBinario {
 		return getRecorrerPostOrder();
 		}
 	
-	
 	//Método para buscar un nodo
 	/*
 	 * Para poder buscar un nodo debemos recorrer el árbol, primero solicitaremos el dato que se quiere buscar
@@ -133,6 +134,23 @@ public class ÁrbolBinario {
 			}
 		}
 		return auxiliar;
+	}
+	
+	//Método para obtener el tamaño de un árbol
+	/*
+	 * Utilizaremos un método recursivo para calcular la altura del árbol, este método funciona de la siguiente 
+	 * manera: pediremos la raíz de nuestro árbol y la guardaremos en la variable "noc", en caso nuestro árbol 
+	 * esté vacío nuestro tamaño tendrá un valor de -1, lo cual indicará que está vacío. En caso contrario
+	 * retornaremos el valor de 1 + la longitud máxima que posean o bien el hijo izquierdo o bien el hijo derecho,
+	 * así el proceso será una suma de "1s" cada vez que se encuentren hijos derechos o izquierdos. Así es como 
+	 * obtendremos la altura del árbol.
+	 */
+	public int tamaño(NodoÁrbol noc) {
+		if(noc == null) {
+			return -1;
+		}else {
+			return 1 + Math.max(tamaño(noc.getHijoIzquierdo()), tamaño(noc.getHijoDerecho()));
+		}
 	}
 	
 	//Ver si el árbol está vacío
@@ -155,5 +173,15 @@ public class ÁrbolBinario {
 	}
 	public ArrayList<Integer> getRecorrerPostOrder() {
 		return RecorrerPostOrder;
+	}
+	public int getAltura() {
+		return altura;
+	}
+	/*
+	 * Esta función SET es especial, porque la altura la obtendremos a partir del método tamaño, y nos servirá a 
+	 * su vez para hacer la llamada desde la clase principal.
+	 */
+	public void setAltura() {
+		altura = tamaño(raíz);
 	}
 }

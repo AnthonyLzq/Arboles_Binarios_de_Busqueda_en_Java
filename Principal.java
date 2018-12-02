@@ -37,7 +37,8 @@ public class Principal {
 						+ "3. Recorrer el árbol PreOrder\n"
 						+ "4. Recorrer el árbol PostOrder\n"
 						+ "5. Buscar un nodo en el árbol\n"
-						+ "6. Salir\n"
+						+ "6. Calcular el tamaño del árbol\n"
+						+ "7. Salir\n"
 						+ "Elige una opción:", "Menú", JOptionPane.QUESTION_MESSAGE));
 				switch(opción) {
 					case 1:
@@ -134,7 +135,7 @@ public class Principal {
 									RPtO = RPtO +  RecorridoPtO.get(i) + "\n";
 								}
 							}
-							JOptionPane.showMessageDialog(null, "El recorrido Pre Order es:\n" + RPtO,
+							JOptionPane.showMessageDialog(null, "El recorrido Post Order es:\n" + RPtO,
 								"Recorrido PreOrder", JOptionPane.INFORMATION_MESSAGE);			
 							arbolito.PostOrder(arbolito.getRaíz()).clear();
 							RPtO = "";
@@ -153,24 +154,40 @@ public class Principal {
 						}
 						break;
 					case 5:
-							if(!arbolito.Empty()) {
-								elemento = Integer.parseInt(JOptionPane.showInputDialog(null, 
-										"Ingrese un número a buscar en el árbol:", "Buscando nodos",
-										JOptionPane.INFORMATION_MESSAGE));
-								if(arbolito.buscador(elemento) != null) {
-									JOptionPane.showMessageDialog(null, "El nodo se encuentra en el árbol",
-											"Nodo encontrado", JOptionPane.INFORMATION_MESSAGE);
-								}else {
-									JOptionPane.showMessageDialog(null, "El nodo no se encuentra en el árbol",
-											"Error", JOptionPane.ERROR_MESSAGE);
-								}
-							}
-							else {
-								JOptionPane.showMessageDialog(null, "El árbol está vacío",
+						if(!arbolito.Empty()) {
+							elemento = Integer.parseInt(JOptionPane.showInputDialog(null, 
+									"Ingrese un número a buscar en el árbol:", "Buscando nodos",
+									JOptionPane.INFORMATION_MESSAGE));
+							if(arbolito.buscador(elemento) != null) {
+								JOptionPane.showMessageDialog(null, "El nodo se encuentra en el árbol",
+										"Nodo encontrado", JOptionPane.INFORMATION_MESSAGE);
+							}else {
+								JOptionPane.showMessageDialog(null, "El nodo no se encuentra en el árbol",
 										"Error", JOptionPane.ERROR_MESSAGE);
 							}
+						}else {
+							JOptionPane.showMessageDialog(null, "El árbol está vacío",
+									"Error", JOptionPane.ERROR_MESSAGE);
+						}
 						break;
 					case 6:
+						/*
+						 * Para determinar el tamaño del árbol primero verificaremos que este no se encuentre 
+						 * vacío, luego tendremos que establecer la altura del árbol llamando al método
+						 * "setAltura", el cual a su vez llamará al método "tamaño", el cual nos devolverá
+						 * el tamaño del árbol.
+						 */
+						if(!arbolito.Empty()) {
+							arbolito.setAltura();
+							int tam = arbolito.getAltura();
+							JOptionPane.showMessageDialog(null, "La altura del árbol es: "+tam,
+									"Altura del árbol", JOptionPane.INFORMATION_MESSAGE);
+						}else {
+							JOptionPane.showMessageDialog(null, "Él árbol está vacío",
+									"Error", JOptionPane.ERROR_MESSAGE);
+						}
+						break;
+					case 7:
 						JOptionPane.showMessageDialog(null,
 								"Aplicación finalizada", "Fin",
 								JOptionPane.INFORMATION_MESSAGE);
@@ -183,7 +200,7 @@ public class Principal {
 			}catch(NumberFormatException n) {
 				JOptionPane.showMessageDialog(null, "Error " +n.getMessage());
 			}
-		}while(opción != 6);
+		}while(opción != 7);
 	}
 
 }
