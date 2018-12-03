@@ -2,6 +2,8 @@ package Árboles_binarios;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 public class ÁrbolBinario {
 	private NodoÁrbol raíz;
 	private int altura;
@@ -21,25 +23,35 @@ public class ÁrbolBinario {
 	//Métodos
 	
 	//Agregar nodo
+	/*
+	 * Se realizó una modificación, a partir de ahora se consultará si el nodo ya existía anteriormente
+	 * para no repetir el mismo nodo ya ingresado anteriormente
+	 */
 	public void AgregarNodo(int dato) {
 		NodoÁrbol nuevo = new NodoÁrbol(dato); 
 		if(!Empty()) {
-			NodoÁrbol auxiliar = raíz;
-			NodoÁrbol padre;
-			while(true) {
-				padre = auxiliar;
-				if(dato < auxiliar.getDato()) {
-					auxiliar = auxiliar.getHijoIzquierdo();
-					if(auxiliar == null) {
-						padre.setHijoIzquierdo(nuevo);
-						return;
+			if(buscador(dato) != null) {
+				JOptionPane.showMessageDialog(null, 
+						"El nodo ya se encuentra en el árbol", "Error",
+						JOptionPane.ERROR_MESSAGE);
+			}else {
+				NodoÁrbol auxiliar = raíz;
+				NodoÁrbol padre;
+				while(true) {
+					padre = auxiliar;
+					if(dato < auxiliar.getDato()) {
+						auxiliar = auxiliar.getHijoIzquierdo();
+						if(auxiliar == null) {
+							padre.setHijoIzquierdo(nuevo);
+							return;
+						}
 					}
-				}
-				else {
-					auxiliar = auxiliar.getHijoDerecho();
-					if(auxiliar == null) {
-						padre.setHijoDerecho(nuevo);
-						return;
+					else {
+						auxiliar = auxiliar.getHijoDerecho();
+						if(auxiliar == null) {
+							padre.setHijoDerecho(nuevo);
+							return;
+						}
 					}
 				}
 			}
@@ -152,6 +164,7 @@ public class ÁrbolBinario {
 			return 1 + Math.max(tamaño(noc.getHijoIzquierdo()), tamaño(noc.getHijoDerecho()));
 		}
 	}
+	
 	
 	//Ver si el árbol está vacío
 	public boolean Empty() {
