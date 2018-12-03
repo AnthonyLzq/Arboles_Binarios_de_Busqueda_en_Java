@@ -1,7 +1,5 @@
 package Árboles_binarios;
-
 import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
 
 public class ÁrbolBinario {
@@ -59,7 +57,7 @@ public class ÁrbolBinario {
 			setRaíz(nuevo);
 		}
 	}
-	//Recorrido InOrder
+	//Recorrido InOrderType
 	/*
 	 * El recorrido InOrder se hace de la siguiente manera: 
 	 *  Hijo Izquierdo -> Raíz -> Hijo Derecho
@@ -165,6 +163,101 @@ public class ÁrbolBinario {
 		}
 	}
 	
+	//Método para eliminar nodos del árbol
+	/*
+	 * El eliminar un nodo de un árbol es un proceso complejo y se tendrá que dividir en dos métodos diferentes, el
+	 * primero que se encargará de eliminar el nodo, y el segundo que se encargará de conseguir un reemplazo, si
+	 * es que lo necesitaria (reordenar el árbol).
+	 * 
+	 * El primer método, "eliminar", primero se dedica a buscar el nodo en el árbol, no se puede hacer mediante el método 
+	 * "buscador", ya que el tipo de búsqueda es algo diferente y además queremos salvar al nodo padre del nodo que hemos 
+	 * buscado. Luego procederemos a analizar cada uno de los 4 casos que se nos presentan:
+	 * 
+	 *  1) El nodo es hoja
+	 *  2) El nodo tiene un sub-árbol izquierdo
+	 *  3) El nodo tiene un sub-árbol derecho
+	 *  4) El nodo tiene sub-árbol izquierdo y derecho
+	 *  
+	 *  En los 3 primeros se puede reordenar el árbol relativamente fácil; sin embargo, el cuarto caso presenta una 
+	 *  dificultad extra en la cual los punteros deben reodernarse para no perder la estructura del árbol, esta 
+	 *  reordenación se da en este mismo método y el reemplazo del nodo eliminado se realiza en el método "reemplazo".
+	 */
+	public boolean eliminar(int dato) {
+		NodoÁrbol auxiliar = raíz;
+		NodoÁrbol padre = raíz;
+		boolean esHijoIzq = true;
+		while(auxiliar.getDato() != dato) {
+			padre = auxiliar;
+			if(dato < auxiliar.getDato()) {
+				esHijoIzq = true;
+				auxiliar = auxiliar.getHijoIzquierdo();
+			}else {
+				esHijoIzq = false;
+				auxiliar = auxiliar.getHijoDerecho();
+			}
+			if(auxiliar == null) {
+				return false;
+			}
+		}
+		if(auxiliar.getHijoIzquierdo() == null && auxiliar.getHijoDerecho() == null) {
+			if(auxiliar == raíz) {
+				raíz = null;
+			}else if(esHijoIzq){
+				padre.setHijoIzquierdo(null);
+			}else {
+				padre.setHijoDerecho(null);
+			}
+		}else if(auxiliar.getHijoDerecho() == null) {
+			if(auxiliar == raíz) {
+				raíz = auxiliar.getHijoIzquierdo();
+			}else if(esHijoIzq){
+				padre.setHijoIzquierdo(auxiliar.getHijoIzquierdo());
+			}else {
+				padre.setHijoDerecho(auxiliar.getHijoDerecho());
+			}
+		}else if(auxiliar.getHijoIzquierdo() == null) {
+			if(auxiliar == raíz) {
+				raíz = auxiliar.getHijoDerecho();
+			}else if(esHijoIzq){
+				padre.setHijoIzquierdo(auxiliar.getHijoDerecho());
+			}else {
+				padre.setHijoDerecho(auxiliar.getHijoIzquierdo());
+			}
+		}else {
+			NodoÁrbol reemplazo = obtenerNodoReemplazo(auxiliar);
+			if(auxiliar == raíz) {
+				raíz = reemplazo;
+			}else if(esHijoIzq){
+				padre.setHijoIzquierdo(reemplazo);
+			}else {
+				padre.setHijoDerecho(reemplazo);
+			}
+			reemplazo.setHijoIzquierdo(auxiliar.getHijoIzquierdo());
+		}
+		return true;
+	}
+	
+	//Método encargado de devolernos el nodo reemplazo
+	/*
+	 * Este método se encarga de reordenar el árbol el árbol según el menor hijo izquierdo del primer hijo derecho 
+	 * del nodo en cuestión, cuando decimos "reordenar" solo debemos entender que este método nos devolverá el nodo
+	 * que utilizaremos para reemplazar al nodo eliminado y la verdadera reordenación se da en el método "eliminar". 
+	 */
+	public NodoÁrbol obtenerNodoReemplazo(NodoÁrbol nodoreem) {
+		NodoÁrbol reemplazarPadre = nodoreem;
+		NodoÁrbol reemplazo = nodoreem;
+		NodoÁrbol auxiliar = nodoreem.getHijoDerecho();
+		while(auxiliar != null) {
+			reemplazarPadre = reemplazo;
+			reemplazo = auxiliar;
+			auxiliar = auxiliar.getHijoIzquierdo();
+		}
+		if(reemplazo != nodoreem.getHijoDerecho()) {
+			reemplazarPadre.setHijoIzquierdo(reemplazo.getHijoDerecho());
+			reemplazo.setHijoDerecho(nodoreem.getHijoDerecho());
+		}
+		return reemplazo;
+	}
 	
 	//Ver si el árbol está vacío
 	public boolean Empty() {
