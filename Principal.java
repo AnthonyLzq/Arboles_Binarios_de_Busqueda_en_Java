@@ -38,7 +38,8 @@ public class Principal {
 						+ "4. Recorrer el árbol PostOrder\n"
 						+ "5. Buscar un nodo en el árbol\n"
 						+ "6. Calcular el tamaño del árbol\n"
-						+ "7. Salir\n"
+						+ "7. Eliminar un nodo del árbol\n"
+						+ "8. Salir\n"
 						+ "Elige una opción:", "Menú", JOptionPane.QUESTION_MESSAGE));
 				switch(opción) {
 					case 1:
@@ -188,6 +189,23 @@ public class Principal {
 						}
 						break;
 					case 7:
+						if(!arbolito.Empty()) {
+							elemento = Integer.parseInt(JOptionPane.showInputDialog(null, 
+									"Ingrese un número a eliminar en el árbol:", "Eliminando nodos",
+									JOptionPane.INFORMATION_MESSAGE));
+							if(!arbolito.eliminar(elemento)) {
+								JOptionPane.showMessageDialog(null, "El nodo no se encuentra en el árbol",
+										"Error", JOptionPane.ERROR_MESSAGE);
+							}else {
+								JOptionPane.showMessageDialog(null, "El nodo fue eliminado con éxito",
+										"Nodo Eliminado", JOptionPane.INFORMATION_MESSAGE);
+							}
+						}else {
+							JOptionPane.showMessageDialog(null, "El árbol está vacío",
+									"Error", JOptionPane.ERROR_MESSAGE);
+						}
+						break;
+					case 8:
 						JOptionPane.showMessageDialog(null,
 								"Aplicación finalizada", "Fin",
 								JOptionPane.INFORMATION_MESSAGE);
@@ -200,7 +218,7 @@ public class Principal {
 			}catch(NumberFormatException n) {
 				JOptionPane.showMessageDialog(null, "Error " +n.getMessage());
 			}
-		}while(opción != 7);
+		}while(opción != 8);
 	}
 
 }
